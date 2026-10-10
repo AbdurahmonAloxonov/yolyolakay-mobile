@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_notification_channel_name">Notifications</string>
+    <string name="chat_notification_channel_name">Chat messages</string>
+
+    <!-- Tez yo'llar (ikonkani bosib turganda) — telefon tilida. -->
+    <string name="shortcut_search_short">Search</string>
+    <string name="shortcut_search_long">Find a ride</string>
+    <string name="shortcut_create_short">Publish</string>
+    <string name="shortcut_create_long">Publish a ride</string>
+    <string name="shortcut_chats_short">Chats</string>
+    <string name="shortcut_chats_long">My chats</string>
+    <string name="widget_label">Next ride</string>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    TEZ YO'LLAR — ilova ikonkasini bosib turganda chiqadi.
+
+    Manzillar ilovaning O'Z sxemasi orqali beriladi (`uz.yolyolakay.mobile://`)
+    va `core/deep_links.dart` ularni ekranlarga yo'naltiradi.
+
+    ⚠️ Uchtadan oshirmaymiz: Android ba'zi launcher'larda faqat 4 tasini
+    ko'rsatadi va ro'yxat uzun bo'lsa odam o'qimay yopadi.
+-->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="search"
+        android:enabled="true"
+        android:icon="@drawable/ic_stat_notification"
+        android:shortcutShortLabel="@string/shortcut_search_short"
+        android:shortcutLongLabel="@string/shortcut_search_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="uz.yolyolakay.mobile://open/search" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="create"
+        android:enabled="true"
+        android:icon="@drawable/ic_stat_notification"
+        android:shortcutShortLabel="@string/shortcut_create_short"
+        android:shortcutLongLabel="@string/shortcut_create_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="uz.yolyolakay.mobile://open/create-ride" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="chats"
+        android:enabled="true"
+        android:icon="@drawable/ic_stat_notification"
+        android:shortcutShortLabel="@string/shortcut_chats_short"
+        android:shortcutLongLabel="@string/shortcut_chats_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="uz.yolyolakay.mobile://open/chats" />
+    </shortcut>
+</shortcuts>

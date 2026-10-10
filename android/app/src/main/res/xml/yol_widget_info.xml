@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Vidjet ta'rifi.
+
+  🔑 `updatePeriodMillis="0"` — ATAYIN: tizim vidjetni O'ZI
+  yangilamaydi. Ma'lumot ilovadan keladi (izohi `HomeWidgetBridge` da),
+  ya'ni tizim taymeri faqat batareya yeb, hech nima o'zgartirmasdi.
+
+  O'lcham: 2×1 katak (110×40dp) — telefon ekranida bitta qator, lekin
+  `resizeMode` bilan odam uni kattalashtira oladi.
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="180dp"
+    android:minHeight="80dp"
+    android:targetCellWidth="3"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="0"
+    android:initialLayout="@layout/yol_widget"
+    android:previewLayout="@layout/yol_widget"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen" />

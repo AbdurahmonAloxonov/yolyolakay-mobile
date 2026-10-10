@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Vidjet zamini — brendning «wine ash» rangi.
+
+  🔴 RANG QOTIRIB YOZILGAN va bu ATAYIN: vidjet ilovaning temasidan
+  TASHQARIDA, foydalanuvchining ish stolida turadi. U yerda bizning
+  tema tokenlarimiz yo'q, va tungi rejimda ham brend rangi o'zgarmasin
+  (ulashiladigan plakat bilan bir xil qoida).
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#32292F" />
+    <corners android:radius="20dp" />
+</shape>

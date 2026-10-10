@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  «YAQIN SAFAR» VIDJETI.
+
+  🔴 IKKI HOLAT bitta maketda: safar bor (route/when/note) va safar yo'q
+  (empty). Ikkinchi maket yasamaymiz — vidjet maketlari Android'da
+  RemoteViews orqali chiziladi va ikkitasini sinxron ushlab turish
+  qo'shimcha xato manbai bo'lardi. Ko'rinishni provider hal qiladi.
+
+  ⚠️ RemoteViews FAQAT sanoqli View'larni qo'llaydi (TextView,
+  ImageView, LinearLayout, ...). ConstraintLayout ham, maxsus
+  komponentlar ham ISHLAMAYDI.
+
+  ⚠️ Matn o'lchamlari `sp` da: odam tizim shriftini kattalashtirsa
+  vidjet ham o'sadi. Qatorlar `maxLines` bilan cheklangan — o'sish
+  vidjetni buzmasin.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/yol_widget_bg"
+    android:padding="14dp">
+
+    <TextView
+        android:id="@+id/widget_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="YOL YOLAKAY"
+        android:textColor="#99E1D9"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.18"
+        android:maxLines="1" />
+
+    <!-- Yo'nalish — vidjetdagi eng katta yozuv. Uzun shahar nomlari
+         uchun ikki qator ruxsat etilgan. -->
+    <TextView
+        android:id="@+id/widget_route"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/widget_when"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#D8D0D4"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/widget_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="#99E1D9"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <!-- BO'SH HOLAT — «o'lik to'rtburchak» bo'lmasin: bosilsa ilova
+         ochiladi va odam qidiruvga tushadi. -->
+    <TextView
+        android:id="@+id/widget_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:visibility="gone" />
+</LinearLayout>

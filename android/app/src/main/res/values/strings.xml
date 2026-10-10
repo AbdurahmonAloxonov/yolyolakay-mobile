@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kanal identifikatori — tarjima QILINMAYDI: manifestdagi
+         `default_notification_channel_id` shu bitta qiymatga tayanadi,
+         til bo'yicha o'zgarsa kanal ikkiga bo'linib ketardi.
+
+         🔴 «_v2» (2026-08-28): eski `yolyolakay_default` kanali
+         YARATILMAGAN edi va ilova yopiq bo'lganda Android uni O'ZI
+         `IMPORTANCE_DEFAULT` bilan yaratardi — natijada ovoz kelardi,
+         lekin tepadan banner CHIQMASDI. Android'da kanal muhimligini
+         keyin ko'tarib bo'lmaydi (buni faqat foydalanuvchi qiladi),
+         shuning uchun YANGI id olindi. Kanal endi `core/push.dart` da
+         ANIQ yaratiladi. Qiymat u yerdagi `_channelDefault` bilan
+         AYNAN bir xil bo'lishi shart.
+
+         🔴 «_v3» (2026-08-28, keyinroq): kanalga OVOZ (`raw/yol_ovoz`)
+         biriktirildi. Ovoz ham muhimlik kabi kanal yaratilgach
+         o'zgarmaydi, shuning uchun `_v2` ga qo'shishning iloji yo'q
+         edi. Bu qiymatga tegilsa `core/push.dart` va `MainActivity.kt`
+         ham o'zgarishi shart — `push_channel_ids_test.dart` shuni
+         tekshiradi. -->
+    <string name="default_notification_channel_id" translatable="false">yolyolakay_default_v3</string>
+
+    <!-- Tizim sozlamalarida ko'rinadigan nom (Ilovalar → YolYolakay →
+         Bildirishnomalar). Android buni ILOVA tilidan emas, TELEFON tilidan
+         tanlaydi — shuning uchun ru/en variantlari alohida papkalarda. -->
+    <string name="default_notification_channel_name">Bildirishnomalar</string>
+
+    <!-- Chat uchun ALOHIDA kanal: foydalanuvchi safar bildirishnomalarini
+         qoldirib, faqat yozishmani jimlata olsin (yoki aksincha). -->
+    <string name="chat_notification_channel_id" translatable="false">yolyolakay_chat_v3</string>
+    <string name="chat_notification_channel_name">Chat xabarlari</string>
+
+    <!-- Tez yo'llar (ikonkani bosib turganda) — telefon tilida. -->
+    <string name="shortcut_search_short">Qidirish</string>
+    <string name="shortcut_search_long">Safar qidirish</string>
+    <string name="shortcut_create_short">E\'lon</string>
+    <string name="shortcut_create_long">E\'lon berish</string>
+    <string name="shortcut_chats_short">Suhbatlar</string>
+    <string name="shortcut_chats_long">Suhbatlarim</string>
+
+    <!-- Vidjetlar ro'yxatida ko'rinadigan nom (tizim tilida — tez
+         yo'llar bilan bir xil qoida). -->
+    <string name="widget_label">Yaqin safar</string>
+</resources>

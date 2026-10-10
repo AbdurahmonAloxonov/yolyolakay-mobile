@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    🔴 USIZ OVOZ FAYLI RELIZDAN TUSHIB QOLADI (2026-08-28 da o'lchandi).
+
+    `isShrinkResources = true` (build.gradle.kts) ishlatilmayotgan
+    resurslarni tashlaydi. U resurslarni KODDAGI `R.raw.…` murojaatiga
+    qarab hisoblaydi, biz esa ovozga SATR orqali murojaat qilamiz:
+    `android.resource://<paket>/raw/yol_ovoz` (MainActivity.kt va
+    `core/push.dart`). Optimizator buni ko'rmaydi va faylni «keraksiz»
+    deb o'chiradi.
+
+    Natijasi jimgina bo'lardi: AAB muvaffaqiyatli yig'iladi, kanal
+    yaratiladi, lekin ovoz YO'Q. Birinchi yig'ilishda aynan shunday
+    bo'ldi — `unzip -l` da fayl umuman ko'rinmadi.
+
+    🔑 `R.raw.yol_ovoz` ni koddan raqam sifatida ishlatish ham
+    muammoni yechardi, LEKIN u holda kanalga raqamli manzil yozilardi.
+    Resurs raqami relizdan relizga o'zgaradi — kanal esa yaratilgach
+    o'zgarmaydi, ya'ni yangilanishdan keyin kanal BOSHQA faylga ishora
+    qilib qolishi mumkin edi. Shuning uchun manzil NOM bo'yicha
+    qoldirildi, fayl esa shu yerda saqlab qolinadi.
+-->
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/yol_ovoz" />

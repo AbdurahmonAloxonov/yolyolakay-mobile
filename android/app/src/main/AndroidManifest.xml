@@ -1,0 +1,217 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Flutter INTERNET ruxsatini FAQAT debug manifestga qo'shadi —
+         release build'da API chaqiruvlari ruxsatsiz yiqiladi. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Joylashuv — ikki holatda: xaritadan nuqta tanlashda ("mening
+         joylashuvim" tugmasi) va SAFAR DAVOMIDA haydovchining joyini
+         yo'lovchiga ko'rsatish uchun. Ikkalasida ham foydalanuvchi
+         ishni O'ZI boshlaydi. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!-- OLDINGI PLAN XIZMATI — safar davomida joylashuvni yuborish
+         (`LivePing`). Telefon cho'ntakda bo'lsa ham ping ketaveradi,
+         tizim panelida esa doimiy bildirishnoma turadi.
+
+         🔴 ACCESS_BACKGROUND_LOCATION ATAYIN YO'Q. Google uni eng
+         qattiq tekshiruvdan o'tkazadi (video bilan ariza, haftalab
+         kutish) va bizga kerak emas: joylashuv faqat foydalanuvchi
+         o'zi boshlagan safar davomida, ko'rinib turgan bildirishnoma
+         bilan olinadi — bu aynan oldingi plan xizmati uchun holat.
+
+         🔴 PLAY: `FOREGROUND_SERVICE_LOCATION` Play Console'da alohida
+         deklaratsiya talab qiladi ("Foreground service permissions" —
+         nima uchun kerakligi + qisqa video). Versiya chiqarishdan
+         oldin `store/` dagi ro'yxatdan tekshiring.
+
+         🔴 targetSdk 34+ da bu ruxsatsiz xizmat ishga tushishi bilan
+         SecurityException tashlaydi — plagin manifestida faqat
+         `<service>` e'lon qilingan, ruxsat esa BIZDAN. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+    <!-- Ekran o'chganda ham nuqtalar bir tekis kelsin (`enableWakeLock`).
+         Busiz Android ularni to'plab, uyg'onganda birdaniga yuboradi va
+         yo'lovchi mashinani sakragan holda ko'radi. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- GPS'siz qurilmalarda ham o'rnatilsin (tarmoq orqali joylashuv yetadi). -->
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+
+    <!-- OVOZLI QIDIRUV — "Toshkentdan Samarqandga" deb aytish.
+         FAQAT qidiruv ekranidagi mikrofon tugmasi bosilganda so'raladi va
+         tinglash tugagach darhol to'xtaydi. Yozib olish, saqlash yoki
+         yuborish YO'Q: nutq qurilmaning o'z tanish xizmatiga boradi.
+
+         🔴 PLAY: bu ruxsat "Ma'lumotlar xavfsizligi" anketasida mikrofonni
+         qayta ochadi — versiya chiqarishdan oldin deklaratsiya yangilansin
+         (`store/` dagi ro'yxat).
+
+         Mikrofonsiz qurilmada ham o'rnatilsin: tugma shunchaki chizilmaydi. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+
+    <application
+        android:label="YolYolakay"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <!-- TEZ YO'LLAR: ikonkani bosib turganda chiqadigan menyu.
+                 Statik (backend kerak emas), lekin ilova "katta" ko'rinadi
+                 va eng ko'p ishlatiladigan uch amal bir bosishda ochiladi. -->
+            <meta-data
+              android:name="android.app.shortcuts"
+              android:resource="@xml/shortcuts" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- MyID OAuth callback. Brauzerda tasdiqdan o'tgan foydalanuvchi shu
+                 orqali ilovaga QAYTADI (aks holda MyID sahifasida qolib ketardi).
+                 Sxema `applicationId` bilan bir xil — teskari-DNS shakli boshqa
+                 ilova o'zlashtirib olishining oldini oladi.
+                 DIQQAT: bu manzil MyID panelida ro'yxatdan o'tgan — o'zgartirilsa
+                 ular tomonida ham qayta ro'yxatdan o'tkazish kerak bo'ladi. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="uz.yolyolakay.mobile" android:host="myid"/>
+            </intent-filter>
+            <!--
+                 ULASHILGAN HAVOLA ILOVADA OCHILSIN (App Links).
+
+                 🔴 NEGA (2026-08-25): safarni matn bilan ham, «safar
+                 pasporti» rasmi bilan ham ulashamiz va ikkalasida ham
+                 `https://yolyolakay.co.uz/uz/trip/{id}` havolasi bor.
+                 Uni bosgan do'st esa BRAUZERDA ochardi — ilovasi bo'lsa
+                 ham. Ya'ni butun ulashish halqasi oxirgi bo'g'inda
+                 uzilib qolardi.
+
+                 `autoVerify="true"` — Android saytdagi
+                 `/.well-known/assetlinks.json` faylini tekshiradi va
+                 mos kelsa havolani SO'RAMASDAN ilovada ochadi.
+
+                 ⚠️ Fayl saytga qo'yilmaguncha tizim tanlov oynasini
+                 ko'rsatadi (brauzer yoki ilova) — bu ham hozirgidan
+                 yaxshi, lekin to'liq ishlashi uchun `assetlinks.json`
+                 shart. Undagi SHA-256 relizni imzolagan kalitniki
+                 bo'lishi kerak (Play App Signing ishlatilsa — Play
+                 bergan kalitniki).
+            -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https" android:host="yolyolakay.co.uz"/>
+            </intent-filter>
+            <!-- TO'LOVDAN QAYTISH. Click'da to'lov tugagach foydalanuvchi
+                 hozircha o'sha yerda QOLIB KETADI: `POST /billing/pay` bergan
+                 manzilda ilovaga qaytaradigan `return_url` yo'q (backenddan
+                 so'ralgan, xat 2026-08-12).
+
+                 Manzil shu yerda OLDINDAN ro'yxatga olindi: backend
+                 `uz.yolyolakay.mobile://payment/...` ni qo'shgan kuni oqim
+                 Play'ga yangi versiya chiqarmasdan ishlab ketadi — chunki
+                 qabul qiluvchi tomon allaqachon tayyor turadi.
+
+                 `success`/`fail` host EMAS, yo'l orqali farqlanadi
+                 (`/success`, `/fail`) — Click natijani query bilan ham
+                 qaytarishi mumkin, ikkalasini ham `deep_links.dart` o'qiydi. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="uz.yolyolakay.mobile" android:host="payment"/>
+            </intent-filter>
+        </activity>
+        <!-- PUSH ko'rinishi. Uchalasi ham bo'lmasa FCM zaxira qiymatlarni oladi:
+             ikonka o'rniga LAUNCHER ikonkasini. U esa to'liq shaffofsiz kvadrat,
+             Android esa status-bar ikonkasidan faqat ALFA kanalini oladi —
+             natijada foydalanuvchi oq kvadrat ko'radi. `ic_stat_notification`
+             aynan shuning uchun alohida yasalgan: shaffof fonda mashina shakli. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/notification_color" />
+        <!-- Kanalni MainActivity yaratadi — bu yerda faqat FCM qaysi kanalga
+             yuborishini ko'rsatamiz. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+        <!-- BOSH EKRAN VIDJETI — «yaqin safar».
+
+             Ma'lumotni ilova yozadi, vidjet faqat chizadi
+             (izohi `YolWidgetProvider` va `HomeWidgetBridge` da).
+
+             ⚠️ `android:exported="false"` QO'YIB BO'LMAYDI: vidjetni
+             tizim (launcher) chaqiradi, ya'ni u tashqaridan ochiq
+             bo'lishi SHART. Faqat APPWIDGET_UPDATE filtri bor —
+             boshqa hech qanday kirish nuqtasi ochilmaydi. -->
+        <receiver
+            android:name=".YolWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/yol_widget_info" />
+        </receiver>
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- Android 11+ da paket ko'rinishi cheklangan: busiz `speech_to_text`
+             qurilmadagi nutqni tanish xizmatini TOPOLMAYDI va "mavjud emas"
+             deb qaytaradi (mikrofon bor bo'lsa ham). -->
+        <intent>
+            <action android:name="android.speech.RecognitionService"/>
+        </intent>
+        <!-- HUJJATNI SURATGA OLISH. Android 11+ paket korinishi cheklangan:
+             busiz ACTION_IMAGE_CAPTURE niyati HAL QILINMAYDI va kamera
+             tugmasi jimgina ishlamay qoladi (image_picker plugini bu
+             deklaratsiyani OZI qilmaydi - tekshirildi 2026-08-27).
+
+             DIQQAT: android.permission.CAMERA ATAYIN elon qilinmagan.
+             Biz kamerani OZIMIZ ochmaymiz, tizim kamera ilovasini
+             chaqiramiz. Ruxsat elon qilinsa, Android uni MAJBURIY qilib
+             qoyadi va odam ortiqcha soroq oynasini korardi. -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE"/>
+        </intent>
+    </queries>
+</manifest>

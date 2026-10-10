@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  O'ZBEK KIRILI — tizim TILIDAN tanlanadi (ilova tilidan emas).
+
+  ⚠️ Papka nomi `values-uz-rCyrl` EMAS: Android'da yozuv (script) BCP-47
+  shaklida beriladi — `values-b+uz+Cyrl`. Birinchisi umuman
+  qo'llanmaydi va matnlar jimgina lotincha qolib ketardi.
+
+  Bu yerda faqat TIZIM ko'rsatadigan matnlar: bildirishnoma kanallari
+  va ikonkani bosib turganda chiqadigan tez yo'llar. Ilova ichidagi
+  matnlar `l10n/` da (u yerda o'girgich ishlatiladi).
+-->
+<resources>
+    <string name="default_notification_channel_name">Билдиришномалар</string>
+    <string name="chat_notification_channel_name">Чат хабарлари</string>
+
+    <string name="shortcut_search_short">Қидириш</string>
+    <string name="shortcut_search_long">Сафар қидириш</string>
+    <string name="shortcut_create_short">Эълон</string>
+    <string name="shortcut_create_long">Эълон бериш</string>
+    <string name="shortcut_chats_short">Суҳбатлар</string>
+    <string name="shortcut_chats_long">Суҳбатларим</string>
+
+    <string name="widget_label">Яқин сафар</string>
+</resources>

@@ -1,0 +1,121 @@
+name: yolyolakay
+description: "YolYolakay — hamrohlik va pochta ilovasi (native)."
+publish_to: 'none'
+# versionCode 1002: eski dev-build'lar 1001 ishlatgan (telefonlarda o'rnatilgan).
+# Undan PAST raqam bilan Android o'rnatishga ruxsat bermaydi ("downgrade"), Play ham
+# qayta ishlatilgan raqamni qabul qilmaydi. Shuning uchun 1001 dan yuqoridan davom etamiz.
+#
+# versionName 1.0.0 (2026-08-12): birinchi Play relizi. Ilgari `0.1.0` turardi —
+# do'kon sahifasida u alfa taassurotini berardi, holbuki ilova to'liq funksional.
+# versionCode 1015 (2026-08-17): Play'ga YUKLANDI — bu raqam endi BAND.
+# 1013/1014 ham band emas edi, lekin 1013 bilan yig'ilgan AAB eskirib qolgandi
+# (SOS soddalashtirilishi va ingliz tili tuzatishi yo'q edi), shuning uchun
+# qayta yig'ildi. Keyingi reliz 1016 dan boshlansin.
+#
+# versionCode 1021 (2026-08-26): o'zbek KIRILLI qidiruvda ishlamasligi
+# tuzatildi (`uzLatinise`) — bu 1020 dagi eng katta jonli xato edi: kirill
+# klaviaturada yozadigan odam shaharni umuman topa olmasdi va ovozli qidiruv
+# o'zbek tilida deyarli har doim bo'sh qaytardi. Shu bilan birga: offline
+# navbat, bekor qilish so'rovi, kassa, ishonch narvoni, ovozli e'lon,
+# «Xizmat holati» ekrani.
+version: 1.0.0+1046
+
+environment:
+  sdk: ^3.12.1
+
+dependencies:
+  # MyID OAuth callback'ini ilova ichida ushlash uchun (deep link).
+  app_links: ^6.4.0
+  # OVOZ BILAN O'QISH — haydovchi ekranga qaramasligi uchun.
+  # 🔴 SOZLAMADAN YOQILADI (standart: O'CHIQ). Ovoz — bezovta qiluvchi
+  # narsa: so'ramasdan gapira boshlagan ilova darhol o'chiriladi.
+  flutter_tts: ^4.2.3
+  dio: ^5.11.0
+  firebase_core: ^4.12.1
+  firebase_messaging: ^16.4.3
+  # Ma'lumotli (data-only) push uchun: FCM'ning o'zi bunday xabarda
+  # bildirishnoma CHIZMAYDI — uni ilova o'zi ko'rsatishi kerak.
+  flutter_local_notifications: ^19.4.2
+  # `zonedSchedule` uchun SHART (safar eslatmalari). Sof Dart, native kod
+  # yo'q — ilova hajmiga sezilarli ta'sir qilmaydi.
+  timezone: ^0.10.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_map: ^8.3.1
+  flutter_riverpod: ^2.6.1
+  flutter_secure_storage: ^10.3.1
+  geolocator: ^14.0.3
+  go_router: ^17.3.0
+  image_picker: ^1.2.3
+  intl: 0.20.2
+  latlong2: ^0.10.1
+  shared_preferences: ^2.5.5
+  url_launcher: ^6.3.2
+  web_socket_channel: ^3.0.3
+  in_app_update: ^5.0.0
+  share_plus: ^13.3.0
+  speech_to_text: ^7.4.0
+  sentry_flutter: ^9.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # Qurilmada HAQIQIY ilovani haydash uchun (izohi
+  # `integration_test/README.md` da). Oddiy `flutter test` ni
+  # o'zgartirmaydi — bu paket faqat `integration_test/` papkasida
+  # ishlatiladi.
+  integration_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.6
+
+flutter:
+  uses-material-design: true
+  fonts:
+    # ASOSIY INTERFEYS SHRIFTI — butun ilovada (app/theme.dart, `fontFamily`).
+    #
+    # 🔴 NEGA QO'SHILDI (egasi, 2026-08-27: "css tegmagandek"): ilovada
+    # interfeys shrifti UMUMAN yo'q edi — matn Android standart shriftida
+    # chizilardi. Brend shrifti (Fraunces) esa 92 fayldan atigi 12 tasida,
+    # qo'lda qo'llangan. Ya'ni tipografik o'ziga xoslik yo'q edi.
+    #
+    # 🔑 NEGA AYNAN INTER: o'zbek kirillining `қ ғ ҳ ў` harflari VA
+    # o'zbek apostrofi `ʻ` (U+02BB) unda BOR. O'lchab tanlandi — Manrope
+    # sinovdan o'tmadi (`қ ғ ҳ` yo'q), ya'ni so'z o'rtasida boshqa
+    # shriftga tushib, matn aralash ko'rinardi.
+    #
+    # O'zgaruvchan (variable) shrift: bitta fayl hamma qalinlikni beradi.
+    # Litsenziya OFL 1.1 — assets/fonts/Inter-OFL.txt.
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-var.ttf
+    # ⚠️ SERIF SARLAVHA SHRIFTI (Fraunces) 2026-09-02 da OLIB TASHLANDI:
+    # unda kirill umuman yo'q edi (o'lchandi — 0 ta belgi) va ruscha
+    # sarlavhalar tizim shriftiga tushib ketardi. Sarlavhalik endi
+    # QALINLIK bilan beriladi (`displayFontStyle`).
+
+# Ikonka manbasi — Capacitor loyihasidagi brend fayllari bilan AYNAN bir xil
+# (~/Desktop/yolyolakay-mobile/resources/), ikkala ilova yonma-yon turganda
+# foydalanuvchi bir xil belgini ko'rsin.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/brand/icon.png
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: assets/brand/icon.png
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#141114"
+  # Bitta rasm ikkala rejimda: logotip shaffof fonli, orqa rang
+  # `color`/`color_dark` bilan beriladi. Capacitor'dagi splash-dark.png
+  # splash.png bilan AYNAN bir xil fayl edi — nusxasi olib tashlandi.
+  image: assets/brand/splash.png
+  android_12:
+    image: assets/brand/icon.png
+    color: "#FFFFFF"
+    color_dark: "#141114"

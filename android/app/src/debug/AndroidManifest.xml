@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The INTERNET permission is required for development. Specifically,
+         the Flutter tool needs it to communicate with the running application
+         to allow setting breakpoints, to provide hot reload, etc.
+    -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Lokal backend bilan test uchun shifrlanmagan trafikka ruxsat:
+         Android 9+ da `http://` standart holda BLOKLANADI, lokal test esa
+         `adb reverse tcp:8090` orqali aynan http bilan boradi.
+
+         ⚠ Release manifestda bu YO'Q va bo'lmasligi kerak — prodda hamma
+         narsa https/wss orqali ketadi. -->
+    <application android:usesCleartextTraffic="true" />
+</manifest>

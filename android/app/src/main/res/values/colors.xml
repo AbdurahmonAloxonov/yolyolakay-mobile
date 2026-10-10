@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- Bildirishnomadagi ikonka va ilova nomi shu rangga bo'yaladi (brend pushti). -->
+    <color name="notification_color">#E91E8C</color>
+</resources>

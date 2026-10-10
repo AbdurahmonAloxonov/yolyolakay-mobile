@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_notification_channel_name">Уведомления</string>
+    <string name="chat_notification_channel_name">Сообщения чата</string>
+
+    <!-- Tez yo'llar (ikonkani bosib turganda) — telefon tilida. -->
+    <string name="shortcut_search_short">Поиск</string>
+    <string name="shortcut_search_long">Найти поездку</string>
+    <string name="shortcut_create_short">Объявление</string>
+    <string name="shortcut_create_long">Разместить поездку</string>
+    <string name="shortcut_chats_short">Чаты</string>
+    <string name="shortcut_chats_long">Мои чаты</string>
+    <string name="widget_label">Ближайшая поездка</string>
+</resources>
